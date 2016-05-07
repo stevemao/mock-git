@@ -17,7 +17,7 @@ $ npm install --save-dev mock-git
 ```js
 const mockGit = require('mock-git');
 const log = 'mocking git bla!';
-const unmock = await m('bla', `console.log('${log}')`);
+const unmock = await mockGit(`console.log('${log}')`, 'bla');
 let actual = shell.exec('git bla').stdout;
 t.is(log + '\n', actual);
 
@@ -32,9 +32,15 @@ t.not(log + '\n', actual);
 
 ## API
 
-### mockGit(command, js)
+### mockGit(js, [command])
 
 Returns a promise which resolves with an unmock function.
+
+##### js
+
+Type: `string`  
+
+Nodejs code.
 
 #### command
 
@@ -42,11 +48,7 @@ Type: `string`
 
 EG: `'commit'`.
 
-##### js
-
-Type: `string`  
-
-Nodejs code.
+If omitted, it will mock the git binary.
 
 
 ## Related
