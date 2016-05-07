@@ -1,0 +1,35 @@
+{
+  "name": "mock-git",
+  "version": "0.0.0",
+  "description": "Mock any git command",
+  "license": "MIT",
+  "repository": "stevemao/mock-git",
+  "author": {
+    "name": "Steve Mao",
+    "email": "maochenyan@gmail.com",
+    "url": "github.com/stevemao"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "mock",
+    "test",
+    "git",
+    "executable"
+  ],
+  "dependencies": {
+    "mock-bin": "0.0.0",
+    "shelljs": "^0.7.0"
+  },
+  "devDependencies": {
+    "ava": "^0.14.0",
+    "xo": "^0.15.0"
+  }
+}
