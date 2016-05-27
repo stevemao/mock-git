@@ -7,7 +7,15 @@ module.exports = function (js, command) {
 
 	if (command) {
 		js = 'var argv = process.argv;' +
-			'if (argv[2] === "' + command + '") {' +
+			'var commandExists = false;' +
+			'var length = argv.length;' +
+			'while (length-- > 1) {' +
+				'if (argv[length] === "' + command + '") {' +
+					'commandExists = true;' +
+					'break;' +
+				'}' +
+			'}' +
+			'if (commandExists) {' +
 				js +
 			'} else {' +
 				'var childProcess = require("child_process");' +

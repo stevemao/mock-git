@@ -17,6 +17,20 @@ test('mock and unmock git bla', async t => {
 	t.not(log + '\n', actual);
 });
 
+test('mock and unmock git --no-pager bla', async t => {
+	const log = 'mocking git bla!';
+	const unmock = await m(`console.log('${log}')`, 'bla');
+	let actual = shell.exec('git --no-pager bla').stdout;
+	t.is(log + '\n', actual);
+
+	actual = shell.exec('git').stdout;
+	t.not(log + '\n', actual);
+
+	unmock();
+	actual = shell.exec('git --no-pager bla').stdout;
+	t.not(log + '\n', actual);
+});
+
 test('mocking bar does not affect foo', async t => {
 	const fooLog = 'mocking foo!';
 	await m(`console.log('${fooLog}')`, 'foo');
