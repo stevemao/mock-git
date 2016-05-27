@@ -9,7 +9,7 @@ module.exports = function (js, command) {
 		js = 'var argv = process.argv;' +
 			'var commandExists = false;' +
 			'var length = argv.length;' +
-			'while (length-- > 1) {' +
+			'while (--length) {' +
 				'if (argv[length] === "' + command + '") {' +
 					'commandExists = true;' +
 					'break;' +
