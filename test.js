@@ -38,11 +38,20 @@ test('mocking bar does not affect foo', async t => {
 	const barLog = 'mocking bar!';
 	await m(`console.log('${barLog}')`, 'bar');
 
-	const barActual = shell.exec('git bar').stdout;
+	let barActual = shell.exec('git bar').stdout;
 	t.is(barLog + '\n', barActual);
 
-	const fooActual = shell.exec('git foo').stdout;
+	barActual = shell.exec('git --no-pager bar').stdout;
+	t.is(barLog + '\n', barActual);
+
+	let fooActual = shell.exec('git foo').stdout;
 	t.is(fooLog + '\n', fooActual);
+
+	fooActual = shell.exec('git --no-pager foo').stdout;
+	t.is(fooLog + '\n', fooActual);
+
+	let stderr = shell.exec('git log').stderr;
+	t.falsy(stderr);
 });
 
 test('mocking git', async t => {
@@ -53,6 +62,9 @@ test('mocking git', async t => {
 	t.is(log + '\n', actual);
 
 	actual = shell.exec('git foo').stdout;
+	t.is(log + '\n', actual);
+
+	actual = shell.exec('git --no-pager log').stdout;
 	t.is(log + '\n', actual);
 
 	unmock();
