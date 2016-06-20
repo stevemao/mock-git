@@ -1,6 +1,7 @@
 import test from 'ava';
 import shell from 'shelljs';
 import m from './';
+
 shell.config.silent = true;
 
 test('mock and unmock git bla', async t => {
@@ -70,4 +71,26 @@ test('mocking git', async t => {
 	unmock();
 	actual = shell.exec('git').stdout;
 	t.not(log + '\n', actual);
+});
+
+test('passing arguments while mocking only commit', async t => {
+	const unmock = await m(`console.log(process.argv.splice(2).join(' '));`, 'commit');
+	const args = 'commit --obviously-invalid-arg -m "second commit with spaces!"';
+
+	const actual = shell.exec(`git ${args}`);
+	t.falsy(actual.stderr);
+	t.is(`${args.replace(new RegExp('"', 'g'), '')}\n`, actual.stdout);
+
+	unmock();
+});
+
+test('passing arguments while mocking whole git', async t => {
+	const unmock = await m(`console.log(process.argv.splice(2).join(' '));`);
+	const args = 'commit --obviously-invalid-arg -m "third commit with spaces!"';
+
+	const actual = shell.exec(`git ${args}`);
+	t.falsy(actual.stderr);
+	t.is(`${args.replace(new RegExp('"', 'g'), '')}\n`, actual.stdout);
+
+	unmock();
 });
