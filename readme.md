@@ -1,4 +1,4 @@
-# mock-git [![Build Status](https://travis-ci.org/stevemao/mock-git.svg?branch=master)](https://travis-ci.org/stevemao/mock-git)
+# mock-git [![Build Status: Linux](https://travis-ci.org/stevemao/mock-git.svg?branch=master)](https://travis-ci.org/stevemao/mock-git) [![Build Status: Windows](https://ci.appveyor.com/api/projects/status/76bg3fbqo2ox9s11/branch/master?svg=true)](https://ci.appveyor.com/project/stevemao/mock-git/branch/master)
 
 > Mock any git command
 
