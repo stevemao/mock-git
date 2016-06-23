@@ -59,18 +59,22 @@ test('mocking git', async t => {
 	const log = 'mocking git!';
 	const unmock = await m(`console.log('${log}')`);
 
-	let actual = shell.exec('git').stdout;
-	t.is(log + '\n', actual);
+	let actual = shell.exec('git');
+	t.is(log + '\n', actual.stdout);
+	t.falsy(actual.stderr);
 
-	actual = shell.exec('git foo').stdout;
-	t.is(log + '\n', actual);
+	actual = shell.exec('git foo');
+	t.is(log + '\n', actual.stdout);
+	t.falsy(actual.stderr);
 
-	actual = shell.exec('git --no-pager log').stdout;
-	t.is(log + '\n', actual);
+	actual = shell.exec('git --no-pager log');
+	t.is(log + '\n', actual.stdout);
+	t.falsy(actual.stderr);
 
 	unmock();
-	actual = shell.exec('git').stdout;
-	t.not(log + '\n', actual);
+	actual = shell.exec('git');
+	t.not(log + '\n', actual.stdout);
+	t.falsy(actual.stderr);
 });
 
 test('passing arguments while mocking only commit', async t => {
