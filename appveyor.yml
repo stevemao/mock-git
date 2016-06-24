@@ -10,7 +10,7 @@ install:
   - npm install -g npm@latest
   - npm install
 matrix:
-  fast_finish: true
+  fast_finish: false
 build: off
 version: '{build}'
 test_script:
