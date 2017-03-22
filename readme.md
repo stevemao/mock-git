@@ -29,6 +29,8 @@ actual = shell.exec('git bla').stdout;
 t.not(log + '\n', actual);
 ```
 
+Checkout the [tests](./test.js) for more details
+
 
 ## API
 
