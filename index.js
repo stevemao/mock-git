@@ -20,12 +20,13 @@ module.exports = function (js, command) {
 			'if (commandExists) {' +
 				js +
 			'} else {' +
+				'function handleExitCode(code) { process.exitCode = code || 0; }' +
 				'var childProcess = require("child_process");' +
 				'argv.shift();' +
 				'argv.shift();' +
 				'childProcess.spawn("' + originalGit + '", argv, {' +
 					'stdio: "inherit"' +
-				'});' +
+				'}).on("close", handleExitCode).on("exit", handleExitCode);' +
 			'}';
 	}
 
