@@ -98,3 +98,23 @@ test('passing arguments while mocking whole git', async t => {
 
 	unmock();
 });
+
+test('passing through exit code', async t => {
+	const unmock = await m('process.exitCode = 1');
+	const args = 'foo';
+
+	const actual = shell.exec(`git ${args}`);
+	t.is(1, actual.code);
+
+	unmock();
+});
+
+test('passing through exit code with multiple mocks', async t => {
+	const unmock = [await m('process.exitCode = 1', 'one'), await m('process.exitCode = 2', 'two')];
+
+	t.is(1, shell.exec(`git one`).code);
+	t.is(2, shell.exec(`git two`).code);
+
+	unmock[0]();
+	unmock[1]();
+});
