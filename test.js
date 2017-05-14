@@ -103,8 +103,8 @@ test('passing through exit code', async t => {
 	const unmock = await m('process.exitCode = 1');
 	const args = 'foo';
 
-	const actual = shell.exec(`git ${args}`);
-	t.is(1, actual.code);
+	const actual = shell.exec(`git ${args}`).code;
+	t.is(1, actual);
 
 	unmock();
 });
