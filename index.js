@@ -1,11 +1,11 @@
 'use strict';
-var mockBin = require('mock-bin');
-var which = require('shelljs').which;
+const mockBin = require('mock-bin');
+const which = require('shelljs').which;
 
-var rbackslash = /\\/g;
+const rbackslash = /\\/g;
 
 module.exports = function (js, command) {
-	var originalGit = which('git').stdout.replace(rbackslash, '\\\\');
+	const originalGit = which('git').stdout.replace(rbackslash, '\\\\');
 
 	if (command) {
 		js = 'var argv = process.argv;' +

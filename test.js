@@ -51,7 +51,7 @@ test('mocking bar does not affect foo', async t => {
 	fooActual = shell.exec('git --no-pager foo').stdout;
 	t.is(fooLog + '\n', fooActual);
 
-	let stderr = shell.exec('git log').stderr;
+	const stderr = shell.exec('git log').stderr;
 	t.falsy(stderr);
 });
 

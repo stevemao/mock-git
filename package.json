@@ -26,11 +26,11 @@
     "executable"
   ],
   "dependencies": {
-    "mock-bin": "^1.0.0",
+    "mock-bin": "^2.0.0",
     "shelljs": "^0.7.0"
   },
   "devDependencies": {
-    "ava": "^0.15.1",
-    "xo": "^0.15.0"
+    "ava": "^0.19.1",
+    "xo": "^0.18.2"
   }
 }
