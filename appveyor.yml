@@ -1,6 +1,7 @@
 environment:
   matrix:
-    - nodejs_version: '7'
+    - nodejs_version: '9'
+    - nodejs_version: '8'
     - nodejs_version: '6'
     - nodejs_version: '4'
 install:
@@ -9,8 +10,7 @@ install:
   - npm install -g npm@latest
   - npm install
 build: off
-version: '{build}'
 test_script:
   - node --version
   - npm --version
-  - npm run test-win
+  - npm test -- --serial

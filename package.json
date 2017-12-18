@@ -10,11 +10,10 @@
     "url": "github.com/stevemao"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4"
   },
   "scripts": {
-    "test": "xo && ava",
-    "test-win": "xo && ava --serial"
+    "test": "xo && ava"
   },
   "files": [
     "index.js"
@@ -30,7 +29,7 @@
     "shelljs": "^0.7.0"
   },
   "devDependencies": {
-    "ava": "^0.19.1",
-    "xo": "^0.19.0"
+    "ava": "^0.24.0",
+    "xo": "^0.18.2"
   }
 }
