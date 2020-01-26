@@ -1,3 +1,4 @@
+const {EOL} = require('os');
 const test = require('ava');
 const shell = require('shelljs');
 const m = require('.');
@@ -8,28 +9,28 @@ test('mock and unmock git bla', async t => {
 	const log = 'mocking git bla!';
 	const unmock = await m(`console.log('${log}')`, 'bla');
 	let actual = shell.exec('git bla').stdout;
-	t.is(log + '\n', actual);
+	t.is(log + EOL, actual);
 
 	actual = shell.exec('git').stdout;
-	t.not(log + '\n', actual);
+	t.not(log + EOL, actual);
 
 	unmock();
 	actual = shell.exec('git bla').stdout;
-	t.not(log + '\n', actual);
+	t.not(log + EOL, actual);
 });
 
 test('mock and unmock git --no-pager bla', async t => {
 	const log = 'mocking git bla!';
 	const unmock = await m(`console.log('${log}')`, 'bla');
 	let actual = shell.exec('git --no-pager bla').stdout;
-	t.is(log + '\n', actual);
+	t.is(log + EOL, actual);
 
 	actual = shell.exec('git').stdout;
-	t.not(log + '\n', actual);
+	t.not(log + EOL, actual);
 
 	unmock();
 	actual = shell.exec('git --no-pager bla').stdout;
-	t.not(log + '\n', actual);
+	t.not(log + EOL, actual);
 });
 
 test('mocking bar does not affect foo', async t => {
@@ -40,16 +41,16 @@ test('mocking bar does not affect foo', async t => {
 	await m(`console.log('${barLog}')`, 'bar');
 
 	let barActual = shell.exec('git bar').stdout;
-	t.is(barLog + '\n', barActual);
+	t.is(barLog + EOL, barActual);
 
 	barActual = shell.exec('git --no-pager bar').stdout;
-	t.is(barLog + '\n', barActual);
+	t.is(barLog + EOL, barActual);
 
 	let fooActual = shell.exec('git foo').stdout;
-	t.is(fooLog + '\n', fooActual);
+	t.is(fooLog + EOL, fooActual);
 
 	fooActual = shell.exec('git --no-pager foo').stdout;
-	t.is(fooLog + '\n', fooActual);
+	t.is(fooLog + EOL, fooActual);
 
 	const {stderr} = shell.exec('git log');
 	t.falsy(stderr);
@@ -60,20 +61,20 @@ test('mocking git', async t => {
 	const unmock = await m(`console.log('${log}')`);
 
 	let actual = shell.exec('git');
-	t.is(log + '\n', actual.stdout);
+	t.is(log + EOL, actual.stdout);
 	t.falsy(actual.stderr);
 
 	actual = shell.exec('git foo');
-	t.is(log + '\n', actual.stdout);
+	t.is(log + EOL, actual.stdout);
 	t.falsy(actual.stderr);
 
 	actual = shell.exec('git --no-pager log');
-	t.is(log + '\n', actual.stdout);
+	t.is(log + EOL, actual.stdout);
 	t.falsy(actual.stderr);
 
 	unmock();
 	actual = shell.exec('git');
-	t.not(log + '\n', actual.stdout);
+	t.not(log + EOL, actual.stdout);
 	t.falsy(actual.stderr);
 });
 
@@ -83,7 +84,7 @@ test('passing arguments while mocking only commit', async t => {
 
 	const actual = shell.exec(`git ${args}`);
 	t.falsy(actual.stderr);
-	t.is(`${args.replace(/"/g, '')}\n`, actual.stdout);
+	t.is(`${args.replace(/"/g, '')}${EOL}`, actual.stdout);
 	unmock();
 });
 
@@ -93,7 +94,7 @@ test('passing arguments while mocking whole git', async t => {
 
 	const actual = shell.exec(`git ${args}`);
 	t.falsy(actual.stderr);
-	t.is(`${args.replace(/"/g, '')}\n`, actual.stdout);
+	t.is(`${args.replace(/"/g, '')}${EOL}`, actual.stdout);
 
 	unmock();
 });
