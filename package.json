@@ -1,6 +1,6 @@
 {
   "name": "mock-git",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Mock any git command",
   "license": "MIT",
   "repository": "stevemao/mock-git",
@@ -10,7 +10,7 @@
     "url": "github.com/stevemao"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=10"
   },
   "scripts": {
     "test": "xo && ava"
@@ -26,10 +26,10 @@
   ],
   "dependencies": {
     "mock-bin": "^2.0.0",
-    "shelljs": "^0.7.0"
+    "shelljs": "^0.8.3"
   },
   "devDependencies": {
-    "ava": "^0.24.0",
-    "xo": "^0.18.2"
+    "ava": "^3.1.0",
+    "xo": "^0.25.3"
   }
 }
