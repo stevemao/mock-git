@@ -1,6 +1,6 @@
-import test from 'ava';
-import shell from 'shelljs';
-import m from '.';
+const test = require('ava');
+const shell = require('shelljs');
+const m = require('.');
 
 shell.config.silent = true;
 
